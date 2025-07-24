@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide to 18 Shakti Peethas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+        body{
+            font-family: Arial, sans-serif;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding-bottom: 10px;
+            font-size: 3em;
+            color: #de2525;
+            text-shadow: 3px 3px 10 px rgba(0, 0, 0, 0.7);
+            position: relative;
+            white-space: pre-line;
+            padding-right: 0px;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            border: none;
+            border-radius: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+            transition: background 0.2s ease, box-shadow 0.2s;
+        }
+        .button:hover {
+            background-color: linear-gradient(45deg, #e64a19, #ff7043);
+            transform: scale(1.1);
+            box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <h1>    The 18 
+        Shakti Peethas
+           of India</h1>
+    <a href="login.html" class="button">Explore Now</a>
+    <div class="temple-silhouette"></div>
+
+    <script>
+        const images = [
+            'url("https://upload.wikimedia.org/wikipedia/commons/7/7a/Draksharama_temple%2C_Draksharamam.jpg")',
+            'url("https://i.ytimg.com/vi/xdtQd2CPIhM/maxresdefault.jpg")',
+            'url("https://behindeverytemple.org/wp-content/uploads/2020/10/chamundeshwari-hero.jpg")',
+            'url("https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Spiritual_16.jpg/1200px-Spiritual_16.jpg")',
+            'url("https://hblimg.mmtcdn.com/content/hubble/img/kanchipuram/mmt/activities/m_Kamakshi%20Amman%20Temple-5_l_480_640.jpg")',
+            'url("https://rashminotes.com/wp-content/uploads/2019/06/g2.png")',
+            'url("https://cdn.sanity.io/images/nlpqts3z/production/95110df0d403ae28eeefbc57ca33c2f0674f60c5-1920x931.jpg")',
+            'url("https://lh5.googleusercontent.com/p/AF1QipP3quJeq7Wn9NNbfnbqGaIZTwYYXJZwCt9ALyXY=w1080-k-no")',
+            'url("https://www.jammukashmirnow.com/Encyc/2020/8/27/2_05_12_22_sharda-peeth_1_H@@IGHT_600_W@@IDTH_802.jpg")',
+            'url("https://behindeverytemple.org/wp-content/uploads/2020/10/39505145.jpg")',
+            ];
+
+        let currentIndex = 0;
+
+        function changeBackground() {
+            document.body.style.backgroundImage = images[currentIndex];
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundRepeat = "no-repeat"; 
+            document.body.style.backgroundPosition = "center";
+            document.body.style.height = "100vh";           
+            document.body.style.width = "100vw";               
+            document.body.style.overflow = "hidden"; 
+
+            currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        setInterval(changeBackground, 1000); 
+    </script>
+</body>
+</html>

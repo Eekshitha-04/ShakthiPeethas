@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shakthi-Peethas</title>
+        <link rel="stylesheet" href="homepage.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+        <style> 
+        #google_translate_element {
+    position: absolute;
+    top: 0;
+    right: 50px;
+    z-index: 999;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.goog-te-gadget-icon {
+    display: none !important;
+}
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .chat-icon {
+      position: fixed; bottom: 20px; right: 20px;
+      background-color: #4285F4; border-radius: 50%;
+      width: 60px; height: 60px;
+      display: flex; justify-content: center; align-items: center;
+      cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+    .chat-icon i { color: white; font-size: 28px; }
+    .chatbot-window {
+      position: fixed; bottom: 90px; right: 20px;
+      width: 320px; height: 420px;
+      background: white; border-radius: 10px;
+      display: none; flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      z-index: 998;
+    }
+    .chatbot-header {
+      background-color: #4285F4; color: white;
+      padding: 12px; font-weight: bold;
+      border-top-left-radius: 10px; border-top-right-radius: 10px;
+    }
+    .chatbot-messages {
+      flex: 1; padding: 10px; overflow-y: auto; font-size: 14px;
+    }
+    .chatbot-input {
+      display: flex; padding: 10px; border-top: 1px solid #ccc;
+    }
+    .chatbot-input input {
+      flex: 1; padding: 5px;
+      border: 1px solid #ccc; border-radius: 5px;
+    }
+    .chatbot-input button {
+      margin-left: 6px; padding: 6px 10px;
+      background-color: #4285F4; color: white;
+      border: none; border-radius: 5px;
+    }
+    .message { margin-bottom: 8px; }
+    .user-message { text-align: right; color: #333; }
+    .bot-message { text-align: left; color: #0b8043; }
+</style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="tab_header">
+                <h1 class="page_title">SHAKTI PEETHAS OF INDIA</h1>
+                 <img src="images/bell.png"  id="navBell" alt="Temple Bell" onclick="openAartiPopup()"/>
+                <div class="tab_box">
+                <button class="tab_btn active">Home</button>
+                <button class="tab_btn">Information</button>
+                <button class="tab_btn">Map</button>
+                <button class="tab_btn">About us</button>
+                <div class="line"></div>
+            </div>
+            </div>
+            <div class="content_box">
+                <div class="content active" style="margin-top: 0px;">
+                   <div style="display: flex; justify-content: center; align-items: flex-start; font-family: 'Roboto Slab', sans-serif; flex-wrap: wrap;">
+  <!-- LEFT: History Text -->
+  <div style="flex: 1; width: 70%; max-width: 1000px;">
+    <p id="mainTitle">
+      📜<span class="history-heading">History how Shakti Peethas are formed:</span>
+      <button class="plain-btn" id="listenBtn">🔊 Listen</button>
+      <button class="plain-btn" id="resetBtn">⏹️ Reset</button><br>
+      The 18 Shakthi Peethas are the holy places where people worship Goddess Parvathi in various Avatars. According to Hindu Mythology, there was a king named Daksha. He has 28 daughters, out of those 27 were married to chandra(the Hindu god of the moon). The eldest daughter was Sati, fell in love with Lord Shiva.  Without listening to her father's words Sati married Lord Shiva and went to kailasa. After a long time, Daksha was conducting a yagna, he invited almost all gods and maharshis except Shiva and Sati.
+      <span id="dots">...</span>
+      <span id="more" class="fade-text"  style="font-family: 'Roboto Slab', sans-serif;">
+      Knowing this Sati said she don't need any Invitation to her father's place and left without Shiva as he said he will not come. At the yagna, Daksha insulted Sathi and Lord Shiva. Humiliated Sati sacrificed herself in the yagna fire.  Knowing all this happened, Lord Shiva got angry and sent his ganas and Veerabadhra. Veerabadhra beheaded Daksha. After all gods worshiped Shiva to stop his violence, Shiva fixed Dakshas head with a goat. Out of guilt and remorse, Shiva carried Sati's body, reminiscing about their moments as a couple, and roamed around the universe with it. All the gods are worried about the condition of Shiva because it will damage the life. Therefore, Lord Vishnu chopped pieces of Sati Mata's dead body, scattering them on the earth with his Sudarshan Chakra. These pieces of Sati Mata's body are now called Shakti Peethas. The Shakti Peethas has its mention in the Kalika Purana and Ashtashakti.Out Of 101 places where the body parts of Lord Shiva’s consort Sati fell, 51 shrines are important. Of these, 18 are the most important body parts. We recognize and worship them as Ashtadasha Shakti Peethas. One is in Pakistan-occupied Kashmir (the temple was destroyed), the other is in Sri Lanka and the other 16 Shakti Peethas are in our country.
+      </span>
+      <button class="plain-btn" onclick="readmore()" id="btn">Read more</button>
+    </p>
+  </div>
+
+  <!-- RIGHT: Image + YouTube Buttons -->
+  <div style="flex: 1; max-width: 300px; max-height: 250px; text-align: center;">
+   <img src="https://www.ramkebhakt.com/wp-content/uploads/2023/01/cropped-main-qimg-75d35e82c662b5ea20a98e1bbd7f8cb5-lq.jpg" alt="Shiva Sati"
+     style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 10px;">
+
+    <button onclick="openPopup('https://www.youtube.com/embed/HmmAYS0fSJ0')" 
+            style="margin: 8px; padding: 10px 20px; background-color: #d63384; color: white; border: none; border-radius: 8px; cursor: pointer;">📺 Dakshayagnam telugu movie</button>
+    
+    <button onclick="openPopup('https://www.youtube.com/embed/ckju3hKvhyo')" 
+            style="margin: 8px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer;">📺 Story in English</button>
+    <button onclick="openPopup('https://www.youtube-nocookie.com/embed/dTm7mPaizGk?si=dbdDketf2DOPWwTI&amp;controls=0')" 
+            style="margin: 8px; padding: 10px 20px; background-color: #c9445a; color: white; border: none; border-radius: 8px; cursor: pointer;">📺 Video about 18 Peethas</button>
+          </div>
+</div>
+
+<!-- Popup Modal -->
+<div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                        background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.3); z-index: 9999; width: 90vw; max-width: 1000px; height: auto;">
+  <span onclick="closePopup()" style="cursor: pointer; color: red; font-weight: bold; float: right;">❎</span><br>
+  <iframe id="videoFrame" width="900" height="500" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" onclick="closePopup()" style="display: none; position: fixed; top: 0; left: 0; 
+      width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9998;"></div>
+                    <center><h1 class="heading">Ashtadasa-ShaktiPeetha-Stotram</h1></center>
+                    <center><audio  id="shlokaAudio" controls autoplay loop style="margin-top: 0px;">
+                        <source src="ShakthiPeetha.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio></center>
+                    <div id="lyricsContainer" class="lyrics" style="margin-top: 0px;">
+                        <p id="line-0">Lankaya shankari devi kamakshi kanchikapure |</p>
+                        <p id="line-1">Pradhyumne shrunkaladevi Chamundi kraunchapattane || 1 ||</p>
+                        <p id="line-2">Allampure Jogulamba srisaile bramarambika |</p>
+                        <p id="line-3">Kolhapure Mahalaksmi mahurye ekavirika || 2 ||</p>
+                        <p id="line-4">Ujjayinyam mahakaḷi pitikyam puruhuthika |</p>
+                        <p id="line-5">Odyanam girijadevi manikya dakshavatike || 2 ||</p>
+                        <p id="line-6">Harikshetre kamarupa prayage madhaveshwari |</p>
+                        <p id="line-7">Jwalayam vaisnavi devi gayam mangalya gaurika || 2 ||</p>
+                        <p id="line-8">Varanasyam Visalakshi Kashmiretu Saraswathi |</p>
+                        <p id="line-9">ashtadasa shakthipeethani yoginamapi durlabham || 2 ||</p>
+                        <p id="line-10">sayankale patennithyam sarva shatru vinashanam |</p>
+                        <p id="line-11">sarvarogaharam divyam sarwa sapatkaram shubham || 2 ||</p>
+                        <p id="line-12">ohm namo durge ||6||</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="info-section">
+                        <div class="search-box">
+                            <i class="fa fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Search Shakti Peethas..." oninput="handleSearchInput()">
+                            <i class="fa fa-times clear-btn" id="clearSearch" onclick="clearSearch()"></i>
+                            </div>
+                        <p id="noResults" style="display: none; text-align:center; color: #aa1e1e; font-weight: bold;">No Shakti Peetha found 🙁</p>
+                    <div class="info-tab">
+                        <div class="peetha-card">
+                            <a href="shakti1.html">
+                                <img src="images/shankari.jpg" alt="Shankari Devi">
+                            </a>
+                            <h3>Shankari Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Trincoli, Srilanka </button>
+                            <p><b>Part fallen:</b> Thigh</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti2.html">
+                                <img src="images/kamakshi.jpg" alt="Kamakshi Devi">
+                            </a>
+                            <h3>Kamakshi Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Kanchi, Tamil Nadu </button>
+                            
+                            <p><b>Part fallen:</b> Skeleton</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti3.html">
+                                <img src="images/shrinkala.jpg" alt="Shrinkala Devi">
+                            </a>
+                            <h3>Shrinkala Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Pradmunyee, West Bengal </button>
+                            <p><b>Part fallen:</b> Stomach</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti4.html">
+                                <img src="images/chamundi.jpg" alt="Chamundeshwari Devi">
+                            </a>
+                            <h3>Chamundeshwari Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Mysuru, Karnataka </button>
+                            <p><b>Part fallen:</b> Hair</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti5.html">
+                                <img src="images/jogulamba.jpg" alt="Jogulamba Devi">
+                            </a>
+                            <h3>Jogulamba Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Alampuram, Telangana </button>
+                            <p><b>Part fallen:</b> Upper Teeth</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti6.html">
+                                <img src="images/bhramaramba.jpg" alt="Bhramarambika Devi">
+                            </a>
+                            <h3>Bhramarambika Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Srisailam, Andhra Pradesh </button>
+                            <p><b>Part fallen:</b> Neck</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti7.html">
+                                <img src="images/mahalaxmi.jpg" alt="Mahalakshmi Devi">
+                            </a>
+                            <h3>Mahalakshmi Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Kolhapur, Maharashtra </button>
+                            <p><b>Part fallen:</b> Left eye</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti8.html">
+                                <img src="images/ekaveerika.jpg" alt="Eka Veerika Devi">
+                            </a>
+                            <h3>Eka Veerika Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Mahur, Maharashtra </button>
+                            <p><b>Part fallen:</b> Right Hand</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti9.html">
+                                <img src="images/mahakali.jpg" alt="Mahakali Devi">
+                            </a>
+                            <h3>Mahakali Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Ujjain, Madhya Pradesh </button>
+                            <p><b>Part fallen:</b> Upper Lip</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti10.html">
+                                <img src="images/puruhutika.jpg" alt="Puruhutika Devi">
+                            </a>
+                            <h3>Puruhutika Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Pithapuram, Andhra Pradesh</button>
+                            <p><b>Part fallen:</b> Left Hand</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti11.html">
+                                <img src="images/girija.jpg" alt="Girija Devi">
+                            </a>
+                            <h3>Girija Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Jajpur, Odisha </button>
+                            <p><b>Part fallen:</b> Navel</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti12.html">
+                                <img src="images/manikyamba.jpg" alt="Manikyamba Devi">
+                            </a>
+                            <h3>Manikyamba Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Draksharamam, Andhra Pradesh </button>
+                            <p><b>Part fallen:</b> Left Cheeck</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti13.html">
+                                <img src="images/kamakhya.jpg" alt="Kamakhya Devi">
+                            </a>
+                            <h3>Kamakhya Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Guwahati, Assam </button>
+                            <p><b>Part fallen:</b> Vulva</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti14.html">
+                                <img src="images/madhaveshwari.jpg" alt="Madhaveshwari Devi">
+                            </a>
+                            <h3>Madhaveshwari Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Prayagraj, Uttar Pradesh </button>
+                            <p><b>Part fallen:</b> Fingers</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti15.html">
+                                <img src="images/jwalamukhi.jpg" alt="Jwalamukhi Devi">
+                            </a>
+                            <h3>Jwalamukhi Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Jwalamukhi, Himachal Pradesh </button>
+                            <p><b>Part fallen:</b> Head</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti16.html">
+                                <img src="images/sarvamangala.jpg" alt="Sarvamangala Devi">
+                            </a>
+                            <h3>Sarvamangala Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Gaya, Bihar </button>
+                            <p><b>Part fallen:</b> Breast</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti17.html">
+                                <img src="images/vishalakshi.jpg" alt="Vishalakshi Devi">
+                            </a>
+                            <h3>Vishalakshi Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Varanasi, Uttar Pradesh </button>
+                            <p><b>Part fallen:</b> Wrist</p>
+                        </div>
+                        <div class="peetha-card">
+                            <a href="shakti18.html">
+                                <img src="images/saraswati.jpg" alt="Saraswati Devi">
+                            </a>
+                            <h3>Saraswati Devi</h3>
+                            <button onclick="window.open('https://www.google.com/maps/dir//15.8769909,78.1346258/@15.8769753,78.052224,12z?entry=ttu&g_ep=EgoyMDI1MDYyMi4wIKXMDSoASAFQAw%3D%3D', '_blank')">📍Sharda, Kashmir </button> 
+                            <p><b>Part fallen:</b> Right Hand</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <center><h4>Note: Here is the map with Shakti Peethas loctions marked. Select any location and get directions</h4></center>
+                    <iframe class="map" src="https://www.google.com.qa/maps/d/embed?mid=11rbXpKYlxD497qWYB8wRDtSac-se8jw&ehbc=2E312F&noprof=1" width="1000" height="700"></iframe>
+                </div>
+<div class="content" style="font-family: Arial, sans-serif; padding: 20px;">
+  <!-- ABOUT US + Image -->
+  <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; margin-bottom: 20px;">
+    
+    <!-- About Us Table -->
+    <table style="background-color:aliceblue; width: 100%; max-width:800px; border-spacing: 0; border-radius: 15px; border: 1px solid #4CAF50; overflow: hidden; border-collapse: separate;">
+      <tr>
+        <td colspan="2" style="text-align: center;">
+          <h1>ABOUT US</h1>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center; padding: 15px;">
+          <h2 style="color: #6a0dad; margin: 0;">Guide: Mrs. Devaki</h2>
+          <h3 style="color: #4b0082; margin-top: 5px;">Assistant Professor, ITD</h3>
+        </td>
+        <td style="text-align: center; padding: 15px;">
+          <h2>C. Satya Shresta</h2>
+          <h5>245122737065@mvsrec.edu.in</h5>
+          <h2>Eekshitha Vanampally</h2>
+          <h5>245122737066@mvsrec.edu.in</h5>
+          <h2>B. Sneha</h2>
+          <h5>245122737315@mvsrec.edu.in</h5>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Feedback + Reviews -->
+  <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px;">
+    
+    <!-- Feedback Box -->
+    <div style="border: 2px solid #4CAF50; height:420px; width:100%; max-width:500px; border-radius: 10px; padding: 20px; background-color: aliceblue; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      <h2 style="margin-top: 0; color: #333;">Leave a Feedback or your Experience</h2>
+
+      <label for="name" style="font-weight: bold;">Name:</label>
+      <input type="text" id="name" placeholder="Your name"
+        style="display: block; margin-bottom: 10px; width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px;">
+
+      <label for="comment" style="font-weight: bold;">Comment:</label>
+      <textarea id="comment" placeholder="share your opinion"
+        style="display: block; margin-bottom: 10px; width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; height: 100px;"></textarea>
+
+        <label for="rating" style="font-weight: bold;">Rate your experience:</label>
+  <div id="starRating" style="font-size: 24px; cursor: pointer; color: #ccc; margin-bottom: 10px;">
+    <span onclick="setRating(1)">★</span>
+    <span onclick="setRating(2)">★</span>
+    <span onclick="setRating(3)">★</span>
+    <span onclick="setRating(4)">★</span>
+    <span onclick="setRating(5)">★</span>
+  </div>
+  <input type="hidden" id="ratingValue" value="0">
+      <button onclick="submitReview()"
+        style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer;"
+        onmouseover="this.style.backgroundColor='#45a049';"
+        onmouseout="this.style.backgroundColor='#4CAF50';">Submit</button>
+
+      <div id="message" style="color: green; margin-top: 10px; font-weight: bold;"></div>
+    </div>
+
+    <!-- All Reviews Section -->
+    <div style="width: 50%; max-width:700px; height:420px; background-color: #f9f9f9; padding: 20px; border-radius: 10px; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      <h3 style="margin-top: 0; color: #333;">All Reviews</h3>
+      <div id="reviews" style="max-height: 350px; overflow-y: auto;"></div>
+    </div>
+  </div>
+</div>
+        </div>
+<div class="top-bar">
+  <div id="google_translate_element"></div>
+  <div class="user-menu" id="userMenu">
+    <button id="userButton" aria-label="User Menu">
+  <svg xmlns="http://www.w3.org/2000/svg" height="28px" width="28px" viewBox="0 -960 960 960" fill="white">
+    <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
+  </svg>
+</button>
+    <div class="dropdown" id="userDropdown">
+      <p id="username"></p>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </div>
+</div>
+<button id="quiz-float-btn" title="Start Quiz">🧠</button>
+
+  <!-- Full Quiz Popup Modal -->
+  <div id="full-quiz-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index:9999; overflow-y: auto;">
+    <div id="quiz-popup-box" style="background:white; margin:40px auto; max-width:980px; border-radius:8px; position:relative;">
+      <span class="close-btn" onclick="document.getElementById('full-quiz-popup').style.display='none'" style="position:absolute; top:10px; right:20px; font-size:20px; color:red; cursor:pointer;">❎</span>
+
+      <!-- INSERT ALL YOUR QUIZ HTML AND SCRIPT HERE -->
+      <!-- Example: -->
+      <div id="quiz-topics">
+        <h2>📝 Quiz</h2>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 10px;">
+  <input
+    type="text"
+    id="quizusername"
+    placeholder="Enter your name"
+    style="width: 250px; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 5px;">
+    
+  <button id="quiz-launcher" style="
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    background: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;">
+    🚀 <span>Start Quiz</span>
+  </button>
+</div>
+  <center><h4>Complete all quiz topics below and score >95% to get certificate</h4></center>
+        <table>
+          <tbody>
+            <tr><td><a href="#" onclick="jumpToTopic('Locations')">📍 Locations</a></td></tr>
+            <tr><td><a href="#" onclick="jumpToTopic('Body Parts of Sati')">🔩 Body Parts of Sati</a></td></tr>
+            <tr><td><a href="#" onclick="jumpToTopic('Deities and Bhairavas')">🙏 Deities and Bhairavas</a></td></tr>
+            <tr><td><a href="#" onclick="jumpToTopic('State-wise Shakti Peethas')">📍 State-wise Shakti Peethas</a></td></tr>
+            <tr><td><a href="#" onclick="jumpToTopic('Historical and Scriptural References')">📜 Historical and Scriptural References</a></td></tr>
+            <tr><td><a href="#" onclick="jumpToTopic('Special Features & Rivers')">🔥 Special Features & Rivers</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="quiz-modal" style="display:none;">
+        <div class="quiz-content" id="quiz-box">
+          <span class="close-btn" onclick="closeQuiz()">❎</span>
+          <div id="question-box">
+            <p id="question"></p>
+            <div id="answers"></div>
+            <button id="prev-btn" onclick="goBack()">Previous</button>
+            <button id="submit-btn" onclick="submitAnswer()">Submit</button>
+            <button id="next-btn" onclick="loadNextQuestion()">Next</button>
+          </div>
+          <button id="score-btn" onclick="showScore()" style="display:none;">Show Final Score</button>
+        </div>
+      </div>
+      <div id="score-display" style="display:none; text-align: center; font-size: 20px;"></div>
+      <div id="progress-tracker" style="text-align:center; font-weight:bold;"></div>
+      <div style="text-align:center;">
+        <button onclick="restartFullQuiz()">🔄 Restart Full Quiz</button>
+      </div>
+      <div id="certificatePreview" style="display: none; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+  <!-- PDF preview will be injected here -->
+</div>
+    </div>
+  </div>
+  <div id="progress-tracker" style="text-align:center; font-weight:bold; padding: 10px;"></div>
+<div style="text-align:center; margin-top:20px;">
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  // 🔑 Expose jsPDF globally so your JS can use it
+  window.jsPDF = window.jspdf.jsPDF;
+</script>
+
+<div class="chat-icon" onclick="toggleChatbot()"><i>🤖</i></div>
+
+<div class="chatbot-window" id="chatbotWindow">
+  <div class="chatbot-header">Gemini AI</div>
+  <div class="chatbot-messages" id="chatMessages"></div>
+  <div class="chatbot-input">
+    <input type="text" id="userInput" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter') sendMessage()">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+        <script src="homepage.js"></script>
+        <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const hash = window.location.hash;
+
+    if (hash === "#info" || hash  === "#info-noaudio") {
+      const tabButtons = document.querySelectorAll(".tab_btn");
+      const contentBoxes = document.querySelectorAll(".content");
+
+      // Remove active from all
+      tabButtons.forEach(btn => btn.classList.remove("active"));
+      contentBoxes.forEach(content => content.classList.remove("active"));
+
+      // Activate second tab (index 1)
+      tabButtons[1].classList.add("active");
+      contentBoxes[1].classList.add("active");
+    }
+     if (hash === "#info-noaudio") {
+    const audio = document.getElementById("shlokaAudio");
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }
+  });
+</script>
+ <script>
+    const firebaseConfigReview = {
+    apiKey: "AIzaSyCiDqFQ0YKsbHUy4QS5NRzY0C0tJ2pirzs",
+    authDomain: "shaktipeethareviews.firebaseapp.com",
+    databaseURL: "https://shaktipeethareviews-default-rtdb.firebaseio.com",
+    projectId: "shaktipeethareviews",
+    storageBucket: "shaktipeethareviews.firebasestorage.app",
+    messagingSenderId: "815409406003",
+    appId: "1:815409406003:web:82485d40ba6a91260c0346"
+  };
+
+  // Initialize as secondary app
+  const reviewApp = firebase.initializeApp(firebaseConfigReview, "reviewApp");
+  const reviewDb = reviewApp.database();
+
+  function submitReview() {
+    const name = document.getElementById("name").value.trim();
+    const comment = document.getElementById("comment").value.trim();
+    const rating = parseInt(document.getElementById("ratingValue").value);
+    const msg = document.getElementById("message");
+
+    if (!name || !comment || rating === 0) {
+      alert("Please enter both name, comment and select a rating");
+      return;
+    }
+
+    reviewDb.ref("reviews").push({
+      name: name,
+      comment: comment,
+      rating: rating,
+      timestamp: Date.now()
+    });
+
+    document.getElementById("name").value = "";
+    document.getElementById("comment").value = "";
+    document.getElementById("ratingValue").value = 0;
+  setRating(0);
+
+    msg.textContent = "✅ Thank you for your review!";
+    setTimeout(() => msg.textContent = "", 3000);
+  }
+
+  // Load and display reviews
+  reviewDb.ref("reviews").on("value", snapshot => {
+    const reviewContainer = document.getElementById("reviews");
+    reviewContainer.innerHTML = "";
+    const data = snapshot.val();
+    if (data) {
+      const reviews = Object.values(data).sort((a, b) => b.timestamp - a.timestamp);
+      reviews.forEach(r => {
+        const div = document.createElement("div");
+        div.className = "review";
+        const date = new Date(r.timestamp).toLocaleString();
+          let starsHTML = "";
+      if (r.rating) {
+        for (let i = 1; i <= 5; i++) {
+          starsHTML += `<span style="color: ${i <= r.rating ? '#FFD700' : '#ccc'}; font-size: 18px;">★</span>`;
+        }
+      }
+        div.innerHTML = `<strong>${r.name}</strong> <small>(${date})</small><br>${starsHTML}
+        <p style="margin: 5px 0;">${r.comment}</p>
+        `;
+        reviewContainer.appendChild(div);
+      });
+    }
+  });
+  </script>
+
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'as,bn,bho,en,gu,hi,kn,ml,ne,or,pa,sa,ta,te,ur', 
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
+                'google_translate_element'
+            );
+        } 
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+    let msg; // Declare globally
+    let isPaused = false;
+    let isSpeaking = false;
+
+    function initSpeech() {
+        const textElement = document.getElementById("mainTitle");
+        if (!textElement) return;
+
+        const text = textElement.innerText;
+        msg = new SpeechSynthesisUtterance(text);
+
+        const langSelect = document.querySelector("#google_translate_element select");
+        const selectedLang = langSelect ? langSelect.value : 'en';
+
+        const langMap = {
+            en: "en-US",
+            hi: "hi-IN",
+            ta: "ta-IN",
+            te: "te-IN",
+            kn: "kn-IN",
+            ml: "ml-IN",
+            bn: "bn-IN",
+            gu: "gu-IN",
+            ur: "ur-IN",
+            or: "or-IN",
+            pa: "pa-IN",
+            sa: "hi-IN",
+            ne: "hi-IN",
+            as: "hi-IN",
+            bho: "hi-IN"
+        };
+
+        msg.lang = langMap[selectedLang] || "en-US";
+        msg.rate = 0.95;
+
+        msg.onend = () => {
+            isSpeaking = false;
+            isPaused = false;
+        };
+    }
+
+    function startOrResumeSpeech() {
+        if (isPaused) {
+            window.speechSynthesis.resume();
+            isPaused = false;
+        } else if (!isSpeaking) {
+            initSpeech();
+            isSpeaking = true;
+            window.speechSynthesis.speak(msg);
+        }
+    }
+
+    function pauseSpeech() {
+        if (isSpeaking && !isPaused) {
+            window.speechSynthesis.pause();
+            isPaused = true;
+        }
+    }
+
+    function resetSpeech() {
+        window.speechSynthesis.cancel();
+        isPaused = false;
+        isSpeaking = false;
+    }
+
+    // Warm up voices (optional for reliability)
+    window.speechSynthesis.onvoiceschanged = () => {
+        speechSynthesis.getVoices();
+    };
+</script>
+<script>
+  const GEMINI_API_KEY = "AIzaSyAuv5e9GRI6VHzd1bUETHiRh18g4-bVyyk"; 
+  function toggleChatbot() {
+    const chatbot = document.getElementById('chatbotWindow');
+    chatbot.style.display = chatbot.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  function appendMessage(sender, message) {
+    const chat = document.getElementById('chatMessages');
+    const msg = document.createElement('div');
+    msg.className = 'message ' + (sender === 'user' ? 'user-message' : 'bot-message');
+    msg.textContent = message;
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function replaceLastBotMessage(newText) {
+    const chat = document.getElementById('chatMessages');
+    const messages = chat.querySelectorAll('.bot-message');
+    if (messages.length > 0) {
+      messages[messages.length - 1].textContent = newText;
+    }
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById('userInput');
+    const userMessage = input.value.trim();
+    if (!userMessage) return;
+
+    appendMessage('user', userMessage);
+    input.value = '';
+    appendMessage('bot', 'Typing...');
+
+    try {
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: userMessage }] }]
+          })
+        }
+      );
+
+      const data = await res.json();
+      console.log("Gemini response:", data);
+      const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, no reply.";
+      replaceLastBotMessage(botReply);
+    } catch (err) {
+      console.error("Gemini API error:", err);
+      replaceLastBotMessage("Error getting response from Gemini.");
+    }
+  }
+</script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBnsyvPC17GvBwAqylYWlbVWRvh3t8okq8",
+    authDomain: "shakthi-peethas.firebaseapp.com",
+    projectId: "shakthi-peethas",
+    storageBucket: "shakthi-peethas.appspot.com",
+    messagingSenderId: "910792313415",
+    appId: "1:910792313415:web:39448c248cbb745851ff62"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const userButton = document.getElementById("userButton");
+  const dropdown = document.getElementById("userDropdown");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const usernameDisplay = document.getElementById("username");
+
+  // Toggle dropdown
+document.getElementById("userButton").addEventListener("click", () => {
+  const dropdown = document.getElementById("userDropdown");
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+});
+
+
+  // Auto-auth check and fetch name
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        usernameDisplay.textContent = `Hello, ${data.firstname}`;
+      } else {
+        usernameDisplay.textContent = `Hello, User`;
+      }
+    } else {
+      // No user is signed in, redirect
+      window.location.href = "login.html";
+    }
+  });
+
+  // Logout handler
+  logoutBtn.addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "login.html";
+  });
+</script>
+  <div class="floating-diyas">
+  <img src="images/diya.png" class="diya" style="--delay: 0s; --left: 7%;" />
+  <img src="images/diya.png" class="diya" style="--delay: 0s; --left: 88%;" />
+</div>
+<!-- Aarti Popup -->
+<div id="aartiPopup" class="aarti-popup">
+  <div class="aarti-content">
+    <span class="aarti-close" onclick="closeAartiPopup()">❌</span>
+     <div style="margin-top: 20px;">
+      <img src="images/bell.png" id="popupBell" alt="Temple Bell" onclick="ringBell()" />
+    </div>
+    <p style="margin-top: 20px; font-size: 16px; font-family: 'Roboto Slab', sans-serif;">
+      🕉️ The vibrations produced by these bells can influence the body and mind, promoting healing and well-being. The sound waves can stimulate the brain, enhancing concentration and mindfulness. They also create a calming effect, reducing stress and anxiety. 🙏
+    </p>
+    <p style="margin-top: 20px; font-size: 16px; font-family: 'Roboto Slab', sans-serif;">In some traditional healing practices, the sound of temple bells is used in conjunction with meditation and prayer to promote physical and mental healing. The vibrations are believed to resonate with the body’s natural frequencies, restoring balance and harmony within.</p>
+    <p style="margin-top: 15px;">
+  🔗 <a href="https://cultureandheritage.org/2024/02/the-science-of-indian-temple-bells-sound-and-spirituality.html" 
+       target="_blank" 
+       style="color: #b30000; text-decoration: underline; font-weight: bold;">
+    Read more about the science behind temple bell vibrations
+  </a>
+</p></div>
+</div>
+<audio id="bellAudio" src="bell.mp3" preload="auto"></audio>
+    </body>
+</html>
